@@ -1,15 +1,9 @@
 import threading
 import time
-import cv2
 import numpy as np
-import paho.mqtt.client as mqtt
 import serial
 #import zbar
 import sys, getopt
-from PIL import Image
-from paho.mqtt import publish
-from video import create_capture
-import serialtest
 import pygame
 import Adafruit_GPIO as GPIO
 import Adafruit_CharLCD as LCD
@@ -115,81 +109,3 @@ while not done:
  
 # Be IDLE friendly
 pygame.quit()
-'''
-def keyboardinput(key): 
-    #Loop until the user clicks the close button.
-    flag  = None
-    clock = pygame.time.Clock()
- 
-    while not key:
- 
-        # This limits the while loop to a max of 10 times per second.
-        # Leave this out and we will use all CPU we can.
-        clock.tick(10)
-         
-        # Main Event Loop
-        for event in pygame.event.get(): # User did something
-            if event.type == pygame.KEYDOWN: # If user release what he pressed.
-                pressed = pygame.key.get_pressed()
-                buttons = [pygame.key.name(k) for k,v in enumerate(pressed) if v]
-                flag = True
-            elif event.type == pygame.KEYUP: # If user press any key.
-                flag = False
-            elif event.type == pygame.QUIT:  # If user clicked close.
-                done = True                 
-     
-        # Print red text if user pressed any key.
-        if flag == True:
-            print('Pressed Key : ')
-            print(buttons[0])
-                serialtest.sersend(buttons[0])
-                break
-        # Print blue text if user released any key.
-        elif flag == False:
-            print("key up")
-        #    get_weight(img2, rad_curvature_value, center_offset)
-        # Print default text if user do nothing.
-        else:
-            print("Please press any key.")
-            
-while 1:
-   # Initialize the game engine
-    pygame.init()
- 
-    # Set the height and width of the screen
-    size   = [400, 300]
-    screen = pygame.display.set_mode(size)
-    
-        #Loop until the user clicks the close button.
-    flag  = None
-    clock = pygame.time.Clock()
- 
-   
- 
-    # This limits the while loop to a max of 10 times per second.
-    # Leave this out and we will use all CPU we can.
-    clock.tick(10)
-    # Main Event Loop
-    for event in pygame.event.get(): # User did something
-        if event.type == pygame.KEYDOWN: # If user release what he pressed.
-            pressed = pygame.key.get_pressed()
-            buttons = [pygame.key.name(k) for k,v in enumerate(pressed) if v]
-            flag = True
-        elif event.type == pygame.KEYUP: # If user press any key.
-            flag = False
-        elif event.type == pygame.QUIT:  # If user clicked close.
-            done = True                 
-     
-        # Print red text if user pressed any key.
-    if flag == True:
-        print('Pressed Key : ')
-        print(buttons[0])
-#        if buttons[0]=='k':
-#            k=0
-#        else:
-#            k=1       
-#    keyboardinput(k)
-    #font = cv2.FONT_HERSHEY_SIMPLEX
-    #txt = 'Weight Value is ' + '{:04.2f}'.format(np.absolute(weight_value)) + ' on the ' + direction + ' direction '
-    #cv2.putText(img, txt, (50,100), font, 1, (255,255,255), 2, cv2.LINE_AA)
-'''    
