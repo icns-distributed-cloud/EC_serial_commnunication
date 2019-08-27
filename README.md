@@ -1,6 +1,7 @@
 # Set up Raspberry Pie Serial Communication
 ## Enable serial in raspi-config
 ## In case of RPi3, the bluetooth is communicating with the uart, so you must stop the bluetooth
+## Therefore, make the following settings.
 ### 1) pi@raspberrypi:~$ sudo nano /boot/config.txt
 ###    - dtoverlay=pi3-disable-bt
 ### 2) stop uart between bluetooth chips
