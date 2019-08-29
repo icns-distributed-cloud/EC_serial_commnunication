@@ -47,6 +47,10 @@ import pygame
 import Adafruit_GPIO as GPIO
 import Adafruit_CharLCD as LCD
 
+
+from pynput import keyboard, mouse
+
+
 lcd_rs = 25
 lcd_en = 24
 lcd_d4 = 23
@@ -69,28 +73,55 @@ ser = serial.Serial(
     rtscts=False,
     dsrdtr=False,
     xonxoff=False)
+
+
+def on_press(key):
+    try:
+        ser.write('{0}'.format(key).encode())
+        lcd.message('{0}'.format(key))
+        print('{0}'.format(key))
+        print('alphanumeric key {0} pressed'.format(
+            key.char))
+    except AttributeError:
+        print('special key {0} pressed'.format(
+            key))
+
+def on_release(key):
+    print('{0} released'.format(
+        key))
+    if key == keyboard.Key.esc:
+        # Stop listener
+        return False
+
+# Collect events until released
+with keyboard.Listener(
+        on_press=on_press,
+        on_release=on_release) as listener:
+    listener.join()
+'''
 # Initialize the game engine
 pygame.init()
- 
+
 # Define the colors we will use in RGB format
 BLACK = (  0,   0,   0)
 WHITE = (255, 255, 255)
 BLUE  = (  0,   0, 255)
 GREEN = (  0, 255,   0)
-RED   = (255,   0,   0)
- 
+RED   = (255,   0,   0) 
+
 # Set the height and width of the screen
 size   = [400, 300]
 screen = pygame.display.set_mode(size)
-font = pygame.font.SysFont("consolas", 20)
+#font = pygame.font.SysFont("consolas", 20)
  
-pygame.display.set_caption("Game Title")
-  
+#pygame.display.set_caption("Game Title")
+
 #Loop until the user clicks the close button.
 done  = False
 flag  = None
 clock = pygame.time.Clock()
- 
+
+
 # print text function
 def printText(msg, color='BLACK', pos=(50, 50)):
     textSurface      = font.render(msg, True, pygame.Color(color), None)
@@ -98,7 +129,7 @@ def printText(msg, color='BLACK', pos=(50, 50)):
     textRect.topleft = pos
  
     screen.blit(textSurface, textRect)
- 
+
 while not done:
  
     # This limits the while loop to a max of 10 times per second.
@@ -123,28 +154,29 @@ while not done:
     # inside the main while done==False loop.
       
     # Clear the screen and set the screen background
-    screen.fill(WHITE)
+  #  screen.fill(WHITE)
  
     # Print red text if user pressed any key.
     if flag == True:
-        printText('you just key down!!', 'RED')
-        printText('--> you pressed any key.', 'RED', (50, 70))
-        printText('Pressed Key : ' + buttons[0], 'RED', (50, 90))
+ #       printText('you just key down!!', 'RED')
+ #       printText('--> you pressed any key.', 'RED', (50, 70))
+ #       printText('Pressed Key : ' + buttons[0], 'RED', (50, 90))
         ser.write(buttons[0].encode())
         lcd.message(buttons[0])
+        print(buttons[0])
  
     # Print blue text if user released any key.
     elif flag == False:
-        printText('you just key up!!', 'BLUE')
-        printText('--> released what you pressed.', 'BLUE', (50, 70))
- 
+  #      printText('you just key up!!', 'BLUE')
+  #      printText('--> released what you pressed.', 'BLUE', (50, 70))
+        print(buttons[0])
     # Print default text if user do nothing.
-    else:
-        printText('Please press any key.')
- 
+  #  else:
+  #      printText('Please press any key.')
     # Go ahead and update the screen with what we've drawn.
     # This MUST happen after all the other drawing commands.
-    pygame.display.flip()
+#    pygame.display.flip()
  
 # Be IDLE friendly
 pygame.quit()
+'''
