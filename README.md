@@ -1,6 +1,7 @@
 # Set up Raspberry Pi Serial Communication
-###Introduction
-EC_serial_communication allows Raspberry pi to establish serial communication.
+### Introduction
+EC_serial_communication allows Raspberry pi to establish serial communication with stm32f4discovery board.
+(It can also communicate with other boards)
 For serial communication, Raspberry pi requires several settings.
 We use a pypnut module to display the status of the communication on the screen.
 More details are described below.
