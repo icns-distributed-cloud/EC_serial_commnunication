@@ -1,4 +1,10 @@
-# Set up Raspberry Pie Serial Communication
+# Set up Raspberry Pi Serial Communication
+### Introduction
+EC_serial_communication allows Raspberry pi to establish serial communication with stm32f4discovery board.
+(It can also communicate with other boards)
+For serial communication, Raspberry pi requires several settings.
+We use a pypnut module to display the status of the communication on the screen.
+More details are described below.
 ## Enable serial in raspi-config
 ## In case of RPi3, the bluetooth is communicating with the uart, so you must stop the bluetooth
 ## Therefore, make the following settings.
